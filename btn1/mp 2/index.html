@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>部长金句，句句与你我息息相关</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/index.css">
+	</head>  
+	<body>
+	<audio loop="loop" autoplay="autoplay" src="music.mp3">
+		你的浏览器不支持
+	</audio>
+	<div id="fullpage">
+		<!-- 首页 -->
+		<div class="section index">
+			<img class='index_logo' src="./image/logo.png" alt="">
+			<img class='index_way' src="./image/index_way.png" alt="">
+			<img class='index_jinju _animate' src="./image/jinjulogo.png" alt="">
+		</div>
+		<!-- 第一屏 -->
+		<ul class="section first">
+			<li class="li1">
+				<img class="icon" src="./image/icon1.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-1.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第二屏 -->
+		<ul class="section second">
+			<li class="li1">
+				<img class="icon" src="./image/icon2.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-2.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第三屏 -->
+		<ul class="section third">
+			<li class="li1">
+				<img class="icon" src="./image/icon3.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-3.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第四屏 -->
+		<ul class="section fourth">
+			<li class="li1">
+				<img class="icon" src="./image/icon4.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-4.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul> 
+		<!-- 第五屏 -->
+		<ul class="section fifth">
+			<li class="li1">
+				<img class="icon" src="./image/icon5.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-5.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第六屏 -->
+		<ul class="section sixth">
+			<li class="li1">
+				<img class="icon" src="./image/icon6.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-6.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第七屏 -->
+		<ul class="section seventh">
+			<li class="li1">
+				<img class="icon" src="./image/icon7.png" alt="">
+				<div class="mask"></div>
+			</li>
+			<li class="lis">
+				<img class="center2" src="./image/5-7.png" alt="">
+				<div class="center1"></div>
+			</li>
+		</ul>
+		<!-- 第八屏结束屏 -->
+		<ul class="section eighth">
+			
+		</ul>
+	</div>
+	<!-- 左上角和右下角的背景 -->
+	<div class="_bg" style="display: none;">
+		<img class="_top" src="./image/bg1.png" alt="">
+		<img class="_bottom" src="./image/bg2.png" alt="">
+	</div>
+	<!-- 箭头 -->
+	<div class="arrow">
+		<img class='index_down' src="./image/down.png" alt="">
+	</div>
+	<img class="_music Animate" id="audio_btn" src="./image/music.png" alt="">
+	<script>
+		(function () {
+			function o() {
+				document.documentElement.style.fontSize = (document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth) / 15 + "px"
+			}
+			var e = null;
+			window.addEventListener("resize", function () {
+				clearTimeout(e), e = setTimeout(o, 300)
+			}, !1), o()
+		})(window);
+	</script>
+	<script src="./lib/jquery.min.js"></script>
+	<script src="./lib/jquery.fullPage.min.js"></script>
+	<script src="./js/index.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="http://comic.qianlong.com/m/weixin_share.js"></script>
+	<script>
+		$.fn.wxshare({
+			title: "部长金句，句句与你我息息相关",
+			desc: "2017全国两会期间，“部长通道”上传递出了哪些重要讯息？",
+			audio: "",
+			bdname: "qhbjyqh",
+			bdfunc: "share",
+			bdvalue: "weixin",
+			shareSuccessCall: function() {}
+		});
+	</script>
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js获取TXT文件中高频字</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./jquery-2.2.2.min.js"></script>
+    <script src='./text.js'></script>
+    <style>
+        #btn {
+            margin: auto auto;
+        }
+        
+        #contentbox {
+            margin: 10%;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<button type="button" id='btn'>点击获取</button>-->
+    <div id='contentbox'>
+        无内容
+    </div>
+    <script>
+        var content = data;
+        //去除文本中的空格及符号
+        // console.log(content);
+        content=content.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,""); 
+        //去除文本中的英文字母和数字
+        content=content.replace(/[a-zA-Z0-9]/g, "")
+        console.log(content);
+        var cntArr = content.split('');//文本分割成的数组
+        console.log(cntArr);
+        var endJson = {};//除去数组中的重复项并计算次数保留成对象
+        var endArr = [];//用于排序的数组（由对象组成）
+        var resArr = [];//结果数组
+        var has = false;
+        var html = '';
+        //遍历开始分割成的数组
+        $.each(cntArr, function (i, n) {
+            //去除重复的文字并计算其出现次数
+            $.each(endJson, function (key, con) {
+                if (key == n) {
+                    endJson[key]++;
+                    // console.log(con);
+                    has = true;
+                    return false;
+                }
+            })
+            if (!has) {
+                    endJson[n] = 1;
+            }
+            has = false;
+        })
+        //将去重并计算出次数的对象转换为数组并排序；
+        $.each(endJson, function (key, con) {
+            // console.log(key);
+            var json = {};
+            json['number'] = con;
+            json['name'] = key;
+            endArr.push(json);
+            // console.log(key + ':' + con);
+        })
+        // $.each(endArr, function (j, m) {
+        //     var min = endArr[j];
+        //         $.each(endArr, function (k,o) {
+        //             if (endArr[k]['number'] < min['number']) {
+        //                 var tran = endArr[k];
+        //                 min = tran;
+        //             }
+        //             resArr.push(min);
+        //         })
+        // })
+        for (var j = 0; j < endArr.length - 1; j++) {
+            for (var k = 1; k < endArr.length - j; k++) {
+                if (endArr[k]['number'] > endArr[k - 1]['number']) {
+                    var parm = endArr[k - 1];
+                    endArr[k - 1] = endArr[k];
+                    endArr[k] = parm;
+                }
+            }
+        }
+        html = '';
+        console.log(endArr);
+            for (var l = 0; l < 10&&l<endArr.length; l++) {
+            html += l + 1 + ':&nbsp;"' + endArr[l]['name'] + '"&nbsp;出现' + endArr[l]['number'] + '&nbsp;次 <br>'
+            // console.log(l+1 +':'+endArr[l]['name']+'出现'+endArr[l]['number']+'次 <br>');
+        }
+        $("#contentbox").html(html);
+    </script>
+</body>
+
+</html>

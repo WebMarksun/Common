@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%
+        }
+        html {
+            background-color: #333
+        }
+        body {
+            position: relative;
+            margin: 0 auto;
+            max-width: 640px;
+            overflow: hidden
+        }
+        #test {
+            width: 100%;
+            height: 100%;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='test'>
+        这只是个测试，测试移动和pc都可以正常显示，布局不会乱掉，就是设置pc为等比，移动端为正常
+    </div>
+    <script>
+        //pc和移动端都可以显示布局不会乱
+        var baseW = "375",
+            baseH = "630",
+            baseR = baseW / baseH;
+        //匹配所有移动端设备
+        function checkPlatform() {
+            return (/(iPhone|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini)/i.test(navigator.userAgent))
+        }
+        //当设备为pc的时候固定一个宽高比
+        function resizeIt() {
+            $("body,html").css({
+                width: $(window).height() * baseR,
+                margin: "0 auto",
+                overflow: "hidden"
+            })
+        }
+        //判断当前设备是移动还是pc，移动的话比例按设备来，pc的话比例根据浏览器高度固定
+        if (!checkPlatform()) {
+            $(window).resize(function () {
+                setTimeout(function () {
+                    resizeIt()
+                }, 200)
+            });
+            resizeIt()
+        };
+    </script>
+</body>
+
+</html>

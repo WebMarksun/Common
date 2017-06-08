@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>微信录音</title>
+	<link href="./img/loadingty.png" rel="shortcut icon">
+</head>
+<body>
+	<!-- <a href="javascript:void(0);" id="startRecord">点击录音</a> -->
+	<!-- <input type="button" value="点击录音" id="startRecord"> -->
+	<!-- <input type="button" value="停止录音" id="stopRecord"> -->
+	<input type="button" value="播放音频" id="playVoice">
+	<input type="button" value="暂停播放" id="pauseVoice">
+	<input type="button" value="停止播放" id="stopVoice">
+   <input type="button" value="下载语音" id="downloadVoice">
+	<!-- <input type="button" value="上传语音" id="uploadVoice"> -->
+	<!-- <input type="button" value="下载语音" id="downloadVoice"> -->
+	<a href="http://comictest.qianlong.com/cyh/test/test.html">返回录音页面</a>
+	<script	src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
+   $(function(){
+      $.ajax({
+         type: "get",
+         async: true,
+         url: "http://partner.qianlong.com/chart/api/cshare",
+         dataType: "jsonp",
+         data: {
+            "weburl":location.href.split("#")[0]
+         },
+         success: function (json) {
+            wx.config({
+               debug: true,
+               appId: json.appId,
+               timestamp: json.timestamp,
+               nonceStr: json.nonceStr,
+               signature: json.signature,
+               jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone','startRecord','stopRecord','onVoiceRecordEnd','playVoice','pauseVoice','stopVoice','onVoicePlayEnd','uploadVoice','downloadVoice']
+            });
+         },
+         error: function () {
+            console.log("share error");
+         }
+      });
+      wx.ready(function () {
+         var voice = {
+
+           serverId: window.location.search.split('=')[1].split('&')[0],
+           localId: ''
+         };
+
+         var obj_co = {
+            title: "WX录音",
+            link: "http://comictest.qianlong.com/cyh/test/test2.html?voice.serverId=" + voice.serverId,
+            imgUrl: "http://comictest.qianlong.com/cyh/test/img/2017.png",
+            success: function () {
+               console.log("share successfully");
+            },
+            cancel: function () { }
+         },
+         obj_co_desc = {
+            desc: "总有一幅情画懂你,让你抿起嘴,想起故乡的那个人那些事,流下眼泪"
+         },
+         obj_timeline = $.extend({}, obj_co),
+         obj_appmsg = $.extend({}, obj_co_desc, obj_co),
+         obj_qq = $.extend({}, obj_co_desc, obj_co),
+         obj_wb = $.extend({}, obj_co_desc, obj_co),
+         obj_qzone = $.extend({}, obj_co_desc, obj_co);
+
+         wx.onMenuShareTimeline(obj_timeline);
+         wx.onMenuShareAppMessage(obj_appmsg);
+         wx.onMenuShareQQ(obj_qq);
+         wx.onMenuShareWeibo(obj_wb);
+         wx.onMenuShareQZone(obj_qzone);
+
+         // 4.5 播放音频
+         document.querySelector('#playVoice').onclick = function () {
+           if (voice.localId == '') {
+             alert('请先使用 startRecord 接口录制一段声音');
+             return;
+           }
+           wx.playVoice({
+             localId: voice.localId
+           });
+         };
+
+         // 4.6 暂停播放音频
+         document.querySelector('#pauseVoice').onclick = function () {
+           wx.pauseVoice({
+             localId: voice.localId
+           });
+         };
+
+         // 4.7 停止播放音频
+         document.querySelector('#stopVoice').onclick = function () {
+           wx.stopVoice({
+             localId: voice.localId
+           });
+         };
+
+         // 4.8 监听录音播放停止
+         wx.onVoicePlayEnd({
+           complete: function (res) {
+             alert('录音（' + res.localId + '）播放结束');
+           }
+         });
+
+         // 4.9 下载语音
+         document.querySelector('#downloadVoice').onclick = function () {
+            alert(window.location)
+           if (voice.serverId == '') {
+             alert('请先使用 uploadVoice 上传声音');
+             return;
+           }
+           wx.downloadVoice({
+             serverId: voice.serverId,
+             success: function (res) {
+               alert('下载语音成功，localId 为' + res.localId);
+               voice.localId = res.localId;
+            },
+            complete:function (res) {
+               alert(JSON.stringify(res) + 'complete');
+            },
+            fail:function (res) {
+               alert(JSON.stringify(res) + 'fail');
+            }
+           });
+         };
+      });
+
+      wx.error(function (res) {
+        alert(res.errMsg);
+      });
+   });
+	</script>
+	</body>
+</html>
