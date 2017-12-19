@@ -1,0 +1,66 @@
+/*公共部分*/
+@font-face {
+    font-family: "fzqtft";
+    /*src: url(assets/font.ttf);*/
+}
+
+html {
+	/*height:100%;*/
+    font-family: "FangSong";
+    font-weight: lighter;
+	/*display: none;*/
+	height: 100%;
+	width:100%;
+	background-color: #fff;
+}
+body{
+	height: 100%;
+	width:100%;
+	background-color: #ccc;
+    margin: 0 auto !important
+}
+.rotbox{
+	height:100%;
+	width:100%;
+	position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+}
+.rotbox .page{
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+	visibility:visible;
+	-webkit-transform-origin:right center;
+	-moz-transform-origin:right center;
+	transform-origin:right center;
+	perspective-origin: 25% 75%;
+}
+.rotbox .page1{
+    background-image: url(../image/1.png);
+    z-index: 9;
+	transform: rotateY(0deg);
+}
+.rotbox .page2{
+    background-image: url(../image/2.png);
+    z-index: 8;
+	transform: rotateY(0deg);
+}
+.rotbox .page3{
+    background-image: url(../image/3.png);
+    z-index: 7;
+	transform: rotateY(0deg);
+}
+.rotbox .page4{
+    background-image: url(../image/4.png);
+    z-index: 6;
+	transform: rotateY(0deg);
+}
+.rotbox .page5{
+    background-image: url(../image/5.png);
+    z-index: 5;
+	transform: rotateY(0deg);
+}
