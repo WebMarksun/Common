@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- element ui 引入样式 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css">
+    <link rel="stylesheet" href="../../libs/global/common.css">
+
+    <style>
+        #editor {
+            width: 1024px;
+            height: 500px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>vue-ueditor demo</h1>
+
+    <el-button-group>
+        <el-button type="primary" @click="getContent">获取内容</el-button>
+        <el-button type="primary" @click="setContent">设置内容</el-button>
+        <el-button type="primary" @click="appendContent">追加内容</el-button>
+    </el-button-group>
+
+    <!--编辑框区域，vue模板中不能使用script标签-->
+    <div ref="editor" @click="setFocus"></div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor.all.custom.js"></script>
+<script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/1.4.3/index.js"></script>
+
+<script src="../global/platform.js"></script>
+<script src="../axios-0.16.2.min.js"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        editor: {},
+        data: {
+            editorId: 'editor',
+            editorContent: ""
+        },
+        methods: {
+            getContent: function () {
+                var arr = [];
+                arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+                arr.push("内容为：");
+                arr.push(this.editor.getContent());
+                alert(arr.join("\n"));
+            },
+            setContent: function () {
+                this.editor.setContent('<p>欢迎使用ueditor，设置内容</p>', false);
+            },
+            appendContent: function () {
+                this.editor.setContent('<p>欢迎使用ueditor，追加内容</p>', true);
+            },
+            setFocus : function () {
+                console.log('click');
+                this.editor.focus();
+            }
+        },
+        created: function () {
+            // 实例化
+            this.$nextTick(function f1() {
+                this.$refs.editor.id = app.editorId;
+                this.editor = UE.getEditor(app.editorId);
+            });
+        }
+    });
+
+</script>
+</body>
+</html>

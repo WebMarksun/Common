@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片编辑</title>
+    <!-- element ui 引入样式 -->
+    <link rel="stylesheet" href="./../../../element-ui/2.0.2/theme-chalk/index.css">
+    <link rel="stylesheet" href="../../../../icon/iconfont.css">
+    <link rel="stylesheet" href="../../../global/common.css">
+    <style>
+        body{margin:0px; padding:0px;}
+        iframe{border: none}
+        [v-cloak] {display: none;}
+        .container{
+            margin : 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!--<el-tabs type="card">-->
+        <!--<el-tab-pane label="图片编辑">-->
+            <iframe id="cropper-image" src="" width="100%"></iframe>
+        <!--</el-tab-pane>-->
+        <!--<el-tab-pane label="水印">-->
+            <!--<iframe id="online-image-lib" src="" width="100%;"></iframe>-->
+
+        <!--</el-tab-pane>-->
+    <!--</el-tabs>-->
+</div>
+</body>
+
+<script src="../../../vue/vue-2.5.2.min.js"></script>
+<script src="../../../element-ui/2.0.2/index.min.js"></script>
+<script src="../../../global/platform.js"></script>
+<script src="../internal.js"></script>
+<script src="imagecrop.js"></script>
+</html>

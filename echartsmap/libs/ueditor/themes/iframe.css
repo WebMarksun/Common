@@ -1,0 +1,36 @@
+/*可以在这里添加你自己的css*/
+/*自定义滚动条*/
+::-webkit-scrollbar {
+    width: 3px;
+}
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+p{
+    text-indent: 0em;
+}
+.app-video-iFrame{
+    width: 480px;
+    height: 300px;
+}
+.app-video-container{
+    text-align:center;
+    text-indent: 0
+}
+.app-video{
+    width: 480px;
+}
+.app-video-description{
+    text-align:left;
+    text-indent: 0
+}
+.app-image{
+    width:480px;
+}
+.app-image-description{
+    text-align:left;
+    text-indent: 0
+}
